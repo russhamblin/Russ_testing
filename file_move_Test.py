@@ -1,8 +1,18 @@
 # get all the imports 
+from logging import root
 import os
 import pathlib
 import shutil
 from pathlib import Path
+from tkinter import *
+from tkinter import filedialog
+
+# create the main form
+
+root = Tk()
+root.title("Move files with text file app")
+root.geometry("400x400")
+
 
 
 # get the source directory for files location
