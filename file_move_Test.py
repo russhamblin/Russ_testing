@@ -12,7 +12,7 @@ from tkinter import filedialog
 
 root = Tk()
 root.title("Move files with text file app")
-root.geometry("400x400")
+root.geometry("800x400")
 
  
 # directory_from_path = Path(r'C:\Users\russh\source\repos\PythonApplication1\From')
@@ -32,19 +32,41 @@ def get_Text_File():
         t = t.strip()
         List_of_Text_to_move.append(t)
     print (List_of_Text_to_move)
+    textinfo.insert(END, (TextFileLocation))
     
     
 
 def get_source_dir():
     sourceDirName = filedialog.askdirectory()
-    print (sourceDirName)
+    global AdjustedSourceDirName
+    AdjustedSourceDirName = fr"{sourceDirName}"
+    sourceinfo.insert(END, (sourceDirName))
+    
 
 def get_new_dir():
     NewDirName = filedialog.askdirectory()
-    print(NewDirName)
+    global AdjustedNewDirName
+    AdjustedNewDirName = fr"{NewDirName}"
+    newinfo.insert(END, (NewDirName))
+    
+List_of_files_to_move = []
 
 def run_this():
-    print ("something")
+    
+#get all the files from the source directory
+    List_of_files_to_check = os.listdir(AdjustedSourceDirName)
+
+    # check if the files exist in the text file. return a list of files to be moved
+
+    
+    for item in List_of_files_to_check:
+        if item in List_of_Text_to_move:
+            List_of_files_to_move.append(item)
+
+        if not List_of_files_to_move:
+            print ("list is empty")
+
+    
 
 
 # what buttons are needed 
@@ -52,43 +74,20 @@ textFileButton = Button(root, text="choose Text file", command=get_Text_File)
 dirSourceButton = Button(root, text="Choose Source Directory", command=get_source_dir)
 dirNewButton = Button(root,text="Choose new folder Location", command=get_new_dir)
 runButton = Button(root, text="Run", command= run_this)
+textinfo = Entry(root)
+sourceinfo = Entry(root)
+newinfo = Entry(root)
 
 #where the buttons are placed
 textFileButton.grid(row=1, column=2, padx=10, pady=10)
 dirSourceButton.grid(row=2, column=2, padx=10, pady=10)
 dirNewButton.grid(row=3, column=2, padx=10, pady=10)
 runButton.grid(row=4, column=2, padx=10, pady=10)
+textinfo.grid(row=1, column=3,padx=10, pady=10)
+sourceinfo.grid(row=2, column=3, padx=10, pady=10)
+newinfo.grid(row=3, column=3, padx=10, pady=10)
 
 
-
-
-
-# get the source directory for files location
-directory_from_path = Path(r'C:\Users\russh\source\repos\PythonApplication1\From')
-
-
-# get the target directory for files location
-directory_to_path = Path(r'C:\Users\russh\source\repos\PythonApplication1\To')
-
-# get the reference or sorting text file location
-
-
-
-#get all the files from the source directory
-List_of_files_to_check = os.listdir(directory_from_path)
-
-
-# check if the files exist in the text file. return a list of files to be moved
-
-List_of_files_to_move = []
-
-
-for item in List_of_files_to_check:
-    if item in List_of_Text_to_move:
-        List_of_files_to_move.append(item)
-
-#if not List_of_files_to_move:
- #   print ("list is empty")
 
 #get the list of items to move with their full file path
 
