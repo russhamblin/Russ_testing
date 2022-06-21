@@ -18,6 +18,7 @@ oldFileLocation = []
 newFileLocation = []
 List_of_files_to_move = []
 List_of_files_to_check = []
+FileLocation = "location"
 
 #using the button get the text file
 def get_Text_File():
@@ -65,10 +66,12 @@ def file_move_check():
                 List_of_files_to_move.append(item)          
         
     file_info.insert(END, (List_of_files_to_move))
+    
 
-
+#using the run button to action the files
 def run_this():
      print ("nothing") 
+     oldFileLocationFile = oldFileLocation.append(get_file_location(AdjustedSourceDirName))
 
 def dummyfunciton():
     print ("nothing")    
@@ -112,6 +115,13 @@ def get_new_file_location():
         item = pathlib.PurePath(directory_to_path,item)
         newFileLocation.append(item)
     return newFileLocation
+
+def get_file_location(path):
+    for item in List_of_files_to_move:
+        item = pathlib.PurePath(path,item)
+        oldFileLocation.append(item)
+    return FileLocation
+
 
 # try and move the files that exist
 
