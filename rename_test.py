@@ -4,6 +4,7 @@ import os
 import pathlib
 import shutil
 from pathlib import Path
+from tabnanny import check
 from tkinter import *
 from tkinter import filedialog
 
@@ -48,14 +49,14 @@ def file_move_check():
         filename = os.path.splitext(filepath)[0]         
         List_of_files_to_check.append(filename)   
     count = 0
-    for item in List_of_files_to_check:
-        for rename in List_Of_Files_To_Rename:
-            if item == rename:
-               pass
-            else: 
-                file_info.insert((count), (item))
-                List_Of_Files_To_Action.append(item)
-                count = count + 1 
+    for rename in List_of_files_to_check:
+        if rename in List_Of_Files_To_Rename: 
+            pass
+               
+        else: 
+            file_info.insert((count), (rename))
+            List_Of_Files_To_Action.append(rename)
+            count = count + 1 
 
 #-----------------------------------------using the run button to action the files------------------------------------------
 def run_this():
@@ -80,8 +81,8 @@ def run_this():
 
 def renamer(oldname, newname,FileExt): 
     global Dirpath   
-    src = f"{Dirpath}/{oldname}.{FileExt}"
-    dst = f"{Dirpath}/{newname}.{FileExt}"
+    src = f"{Dirpath}/{oldname}{FileExt}"
+    dst = f"{Dirpath}/{newname}{FileExt}"
 
     os.rename(src, dst)            
 
@@ -113,6 +114,7 @@ def remove_des(oldname):
     return oldname.split('(')[0]
 
 def removeRev(text,n):
-    text = [text[i:i+n] for i in range(0,len(text),n)
+    rename = [text[i:i+n] for i in range(0,len(text),n)]
+    return rename[0]
 
 root.mainloop()
