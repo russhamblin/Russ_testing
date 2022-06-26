@@ -107,14 +107,4 @@ Cancelprocess.grid(row = 3,column =2,sticky = "ne",padx=10, pady=10)
 #-------------------------------------renaming files-------------------------------------------------------
 
 
-
-#----------------------------------remove additional info from original file name-------------------------
-
-def remove_des(oldname):
-    return oldname.split('(')[0]
-
-def removeRev(text,n):
-    rename = [text[i:i+n] for i in range(0,len(text),n)]
-    return rename[0]
-
 root.mainloop()
